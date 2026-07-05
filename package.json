@@ -1,0 +1,20 @@
+{
+  "name": "ttc-chat-bot",
+  "version": "1.0.0",
+  "description": "Standalone customer service chatbot backend for The Kua Company",
+  "type": "commonjs",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.68.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.5.2",
+    "nodemailer": "^9.0.3",
+    "twilio": "^6.0.2"
+  }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Kua Company — Chat Widget Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="demo-page">
+    <h1>The Kua Company</h1>
+    <p>This page simulates thekuacompany.com. The chat widget in the bottom-right corner is what will eventually be embedded via the WordPress plugin.</p>
+  </main>
+
+  <div id="chat-widget">
+    <button id="chat-toggle" aria-label="Open chat">💬</button>
+
+    <div id="chat-panel" class="hidden">
+      <div class="chat-header">
+        <div class="chat-tabs">
+          <button class="tab-btn active" data-mode="chat">Support</button>
+          <button class="tab-btn" data-mode="recipes">Recipe Ideas</button>
+        </div>
+        <button id="chat-close" aria-label="Close chat">✕</button>
+      </div>
+
+      <div id="chat-messages" class="chat-messages"></div>
+
+      <form id="chat-form" class="chat-input-row">
+        <input id="chat-input" type="text" placeholder="Type a message..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
