@@ -3,7 +3,7 @@ const path = require('path');
 const Anthropic = require('@anthropic-ai/sdk');
 const config = require('../config');
 
-const RECIPE_SEED_PATH = path.join(__dirname, '..', '..', 'knowledge-base', 'recipes', 'recipe-ideas.md');
+const RECIPE_SEED_PATH = path.join(process.cwd(), 'knowledge-base', 'recipes', 'recipe-ideas.md');
 
 const client = new Anthropic({ apiKey: config.apiKey });
 

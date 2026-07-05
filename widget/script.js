@@ -1,8 +1,8 @@
 const BACKEND_URL = "PASTE_YOUR_RENDER_URL_HERE";
 
 const ENDPOINTS = {
-  chat: "/chat",
-  recipes: "/recipes",
+  chat: "/api/chat",
+  recipes: "/api/recipes",
 };
 
 const GREETINGS = {
@@ -73,7 +73,7 @@ function captureLeadIfPresent(rawText) {
   try {
     const lead = JSON.parse(jsonPart);
     if (lead && lead.name && lead.contact) {
-      fetch(`${BACKEND_URL}/lead`, {
+      fetch(`${BACKEND_URL}/api/lead`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: lead.name, contact: lead.contact }),

@@ -1,0 +1,69 @@
+const nodemailer = require('nodemailer');
+const twilio = require('twilio');
+const { checkRateLimit } = require('../src/services/rateLimit');
+
+async function sendLeadEmail({ name, contact, message, timestamp }) {
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.hostinger.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.HOSTINGER_EMAIL,
+      pass: process.env.HOSTINGER_EMAIL_PASSWORD,
+    },
+  });
+
+  await transporter.sendMail({
+    from: process.env.HOSTINGER_EMAIL,
+    to: 'support@thekuacompany.com',
+    subject: `New Corporate Gifting Lead — ${name}`,
+    text: `Name: ${name}\nContact: ${contact}\nTime: ${timestamp}\nMessage: ${message}`,
+  });
+}
+
+async function sendLeadWhatsApp({ name, contact, timestamp }) {
+  const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+  await client.messages.create({
+    from: process.env.TWILIO_WHATSAPP_FROM,
+    to: process.env.TWILIO_WHATSAPP_TO,
+    body: `New corporate gifting lead from TTC chatbot. Name: ${name}. Contact: ${contact}. Time: ${timestamp}`,
+  });
+}
+
+module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  const ip = (req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown').split(',')[0].trim();
+  const { allowed } = checkRateLimit(ip);
+  if (!allowed) {
+    return res.status(429).json({ error: 'Too many requests. Please wait a few minutes and try again.' });
+  }
+
+  const { name, contact, message } = req.body;
+
+  if (typeof name !== 'string' || name.trim() === '' || typeof contact !== 'string' || contact.trim() === '') {
+    return res.status(400).json({ error: 'name and contact are required and must be non-empty strings' });
+  }
+
+  const leadDetails = {
+    name: name.trim(),
+    contact: contact.trim(),
+    message: typeof message === 'string' && message.trim() !== '' ? message.trim() : 'Corporate gifting inquiry via chatbot',
+    timestamp: new Date().toISOString(),
+  };
+
+  try {
+    await Promise.all([sendLeadEmail(leadDetails), sendLeadWhatsApp(leadDetails)]);
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error sending lead notification:', error);
+    res.json({ success: false, error: error.message });
+  }
+};

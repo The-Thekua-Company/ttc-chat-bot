@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const KNOWLEDGE_BASE_DIR = path.join(__dirname, '..', '..', 'knowledge-base');
+const KNOWLEDGE_BASE_DIR = path.join(process.cwd(), 'knowledge-base');
 
 let cachedText = null;
 

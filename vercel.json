@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "functions": {
+    "api/chat.js": { "maxDuration": 30, "includeFiles": "knowledge-base/**" },
+    "api/lead.js": { "maxDuration": 15 },
+    "api/recipes.js": { "maxDuration": 30, "includeFiles": "knowledge-base/**" },
+    "api/health.js": { "maxDuration": 5 }
+  }
+}
