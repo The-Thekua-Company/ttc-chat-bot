@@ -1,4 +1,4 @@
-const BACKEND_URL = "PASTE_YOUR_RENDER_URL_HERE";
+const BACKEND_URL = "https://ttc-chat-bot.vercel.app";
 
 const ENDPOINTS = {
   chat: "/api/chat",
