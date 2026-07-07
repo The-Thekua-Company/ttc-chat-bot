@@ -103,6 +103,38 @@ const PRODUCT_LINK_TOKEN = "PRODUCT_LINK:";
 const PRODUCT_LINK_URL_PREFIX = "https://thekuacompany.com/product/";
 const RAW_PRODUCT_URL_REGEX = /https:\/\/thekuacompany\.com\/product\/[^\s)]+/;
 
+const PACK_CATALOG = [
+  {
+    match: /250g\s*Everyday\s*Pack/i,
+    label: "250g Everyday Pack",
+    url: "https://thekuacompany.com/product/handmade-thekua-250g-everyday-pack/",
+  },
+  {
+    match: /500g\s*Family\s*Pack/i,
+    label: "500g Family Pack",
+    url: "https://thekuacompany.com/product/handmade-thekua-500g-family-pack/",
+  },
+  {
+    match: /1\s*kg\s*Large\s*Family\s*Pack/i,
+    label: "1kg Large Family Pack",
+    url: "https://thekuacompany.com/product/1kg-handmade-thekua-box-large-family-pack-fresh-traditional-handmade/",
+  },
+  {
+    match: /2\s*kg\s*(Bulk\s*\/?\s*Sharing)?\s*Pack/i,
+    label: "2kg Bulk/Sharing Pack",
+    url: "https://thekuacompany.com/product/handmade-thekua-2kg-bulk-sharing-pack/",
+  },
+];
+
+function findPackMention(text) {
+  for (const pack of PACK_CATALOG) {
+    if (pack.match.test(text)) {
+      return { label: pack.label, url: pack.url };
+    }
+  }
+  return null;
+}
+
 function extractProductLink(rawText) {
   const tokenIndex = rawText.indexOf(PRODUCT_LINK_TOKEN);
 
@@ -116,18 +148,27 @@ function extractProductLink(rawText) {
         return { text: visibleText, link: { label: parsed.label, url: parsed.url } };
       }
     } catch (err) {
-      // Malformed token — fall through to plain text below.
+      // Malformed token — fall through to the pack-name detection below.
     }
 
-    return { text: visibleText || rawText, link: null };
+    const packFromText = findPackMention(visibleText);
+    return { text: visibleText || rawText, link: packFromText };
   }
 
-  // Fallback: if Claude writes a bare product URL instead of the token, still make it clickable.
+  // Fallback tier 1: Claude wrote a bare product URL instead of the token.
   const urlMatch = rawText.match(RAW_PRODUCT_URL_REGEX);
   if (urlMatch) {
     const url = urlMatch[0].replace(/[.,]+$/, "");
     const cleanedText = rawText.replace(urlMatch[0], "").replace(/[ \t]{2,}/g, " ").trim();
     return { text: cleanedText, link: { label: "View Product", url } };
+  }
+
+  // Fallback tier 2: no token, no URL — but Claude still named a specific pack in the text.
+  // Attach the correct button deterministically from our own catalog rather than relying
+  // on the model to format anything at all.
+  const packFromText = findPackMention(rawText);
+  if (packFromText) {
+    return { text: rawText, link: packFromText };
   }
 
   return { text: rawText, link: null };

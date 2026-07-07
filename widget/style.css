@@ -383,11 +383,11 @@
   align-items: center;
   justify-content: center;
   margin-top: 10px !important;
-  padding: 10px 18px !important;
-  border: 0 !important;
+  padding: 9px 18px !important;
+  border: 1.5px solid var(--ttc-chat-primary) !important;
   border-radius: 2px !important;
-  background: var(--ttc-chat-primary) !important;
-  color: #fffdf8 !important;
+  background: transparent !important;
+  color: var(--ttc-chat-primary) !important;
   font-family: var(--ttc-chat-font-button) !important;
   font-size: 12px !important;
   font-weight: 700 !important;
@@ -397,12 +397,12 @@
   text-decoration: none !important;
   white-space: nowrap;
   cursor: pointer;
-  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
 .msg-link-btn:hover {
-  background: #8c3d10 !important;
-  box-shadow: 0 6px 18px rgba(181, 84, 26, 0.24);
+  background: var(--ttc-chat-primary) !important;
+  color: #fffdf8 !important;
   transform: translateY(-1px);
 }
 
