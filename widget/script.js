@@ -18,6 +18,8 @@ const messagesEl = document.getElementById("chat-messages");
 const form = document.getElementById("chat-form");
 const input = document.getElementById("chat-input");
 const tabButtons = document.querySelectorAll(".tab-btn");
+const teaser = document.getElementById("chat-teaser");
+const teaserCloseBtn = document.getElementById("chat-teaser-close");
 
 let currentMode = "chat";
 const conversationHistory = { chat: [], recipes: [] };
@@ -174,9 +176,40 @@ function extractProductLink(rawText) {
   return { text: rawText, link: null };
 }
 
+const TEASER_SESSION_KEY = "ttcChatTeaserShown";
+
+function hideTeaser() {
+  if (teaser) teaser.classList.add("hidden");
+}
+
+function showTeaserIfNeeded() {
+  if (!teaser) return;
+  if (!panel.classList.contains("hidden")) return; // chat already open
+
+  try {
+    if (sessionStorage.getItem(TEASER_SESSION_KEY)) return;
+    sessionStorage.setItem(TEASER_SESSION_KEY, "1");
+  } catch (err) {
+    // Storage unavailable (e.g. privacy mode) — show once for this page view only.
+  }
+
+  teaser.classList.remove("hidden");
+}
+
+setTimeout(showTeaserIfNeeded, 3500);
+
+if (teaserCloseBtn) {
+  teaserCloseBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    hideTeaser();
+  });
+}
+
 function toggleChatPanel() {
   panel.classList.toggle("hidden");
   if (!panel.classList.contains("hidden")) {
+    hideTeaser();
     ensureGreeting(currentMode);
     input.focus();
   }
