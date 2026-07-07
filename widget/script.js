@@ -101,24 +101,36 @@ function captureLeadIfPresent(rawText) {
 
 const PRODUCT_LINK_TOKEN = "PRODUCT_LINK:";
 const PRODUCT_LINK_URL_PREFIX = "https://thekuacompany.com/product/";
+const RAW_PRODUCT_URL_REGEX = /https:\/\/thekuacompany\.com\/product\/[^\s)]+/;
 
 function extractProductLink(rawText) {
   const tokenIndex = rawText.indexOf(PRODUCT_LINK_TOKEN);
-  if (tokenIndex === -1) return { text: rawText, link: null };
 
-  const visibleText = rawText.slice(0, tokenIndex).trim();
-  const jsonPart = rawText.slice(tokenIndex + PRODUCT_LINK_TOKEN.length).trim();
+  if (tokenIndex !== -1) {
+    const visibleText = rawText.slice(0, tokenIndex).trim();
+    const jsonPart = rawText.slice(tokenIndex + PRODUCT_LINK_TOKEN.length).trim();
 
-  try {
-    const parsed = JSON.parse(jsonPart);
-    if (parsed && parsed.label && parsed.url && parsed.url.startsWith(PRODUCT_LINK_URL_PREFIX)) {
-      return { text: visibleText, link: { label: parsed.label, url: parsed.url } };
+    try {
+      const parsed = JSON.parse(jsonPart);
+      if (parsed && parsed.label && parsed.url && parsed.url.startsWith(PRODUCT_LINK_URL_PREFIX)) {
+        return { text: visibleText, link: { label: parsed.label, url: parsed.url } };
+      }
+    } catch (err) {
+      // Malformed token — fall through to plain text below.
     }
-  } catch (err) {
-    // Malformed token — just show the visible text, no button.
+
+    return { text: visibleText || rawText, link: null };
   }
 
-  return { text: visibleText || rawText, link: null };
+  // Fallback: if Claude writes a bare product URL instead of the token, still make it clickable.
+  const urlMatch = rawText.match(RAW_PRODUCT_URL_REGEX);
+  if (urlMatch) {
+    const url = urlMatch[0].replace(/[.,]+$/, "");
+    const cleanedText = rawText.replace(urlMatch[0], "").replace(/[ \t]{2,}/g, " ").trim();
+    return { text: cleanedText, link: { label: "View Product", url } };
+  }
+
+  return { text: rawText, link: null };
 }
 
 function toggleChatPanel() {
