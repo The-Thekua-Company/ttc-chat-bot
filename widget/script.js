@@ -12,6 +12,7 @@ const GREETINGS = {
 
 const toggleBtn = document.getElementById("chat-toggle");
 const closeBtn = document.getElementById("chat-close");
+const widget = document.getElementById("chat-widget");
 const panel = document.getElementById("chat-panel");
 const messagesEl = document.getElementById("chat-messages");
 const form = document.getElementById("chat-form");
@@ -22,17 +23,29 @@ let currentMode = "chat";
 const conversationHistory = { chat: [], recipes: [] };
 const greeted = { chat: false, recipes: false };
 
-function addMessage(mode, role, text) {
-  conversationHistory[mode].push({ role, text });
+function addMessage(mode, role, text, link = null) {
+  conversationHistory[mode].push({ role, text, link });
   if (mode === currentMode) {
-    renderMessage(role, text);
+    renderMessage(role, text, link);
   }
 }
 
-function renderMessage(role, text) {
+function renderMessage(role, text, link = null) {
   const bubble = document.createElement("div");
   bubble.className = `msg ${role}`;
   bubble.textContent = text;
+
+  if (link && link.url && link.label) {
+    const linkBtn = document.createElement("a");
+    linkBtn.className = "msg-link-btn";
+    linkBtn.href = link.url;
+    linkBtn.textContent = link.label;
+    linkBtn.target = "_blank";
+    linkBtn.rel = "noopener noreferrer";
+    bubble.appendChild(document.createElement("br"));
+    bubble.appendChild(linkBtn);
+  }
+
   messagesEl.appendChild(bubble);
   messagesEl.scrollTop = messagesEl.scrollHeight;
   return bubble;
@@ -40,7 +53,7 @@ function renderMessage(role, text) {
 
 function renderCurrentMode() {
   messagesEl.innerHTML = "";
-  conversationHistory[currentMode].forEach(({ role, text }) => renderMessage(role, text));
+  conversationHistory[currentMode].forEach(({ role, text, link }) => renderMessage(role, text, link));
 }
 
 function ensureGreeting(mode) {
@@ -86,15 +99,51 @@ function captureLeadIfPresent(rawText) {
   return visibleText;
 }
 
-toggleBtn.addEventListener("click", () => {
+const PRODUCT_LINK_TOKEN = "PRODUCT_LINK:";
+const PRODUCT_LINK_URL_PREFIX = "https://thekuacompany.com/product/";
+
+function extractProductLink(rawText) {
+  const tokenIndex = rawText.indexOf(PRODUCT_LINK_TOKEN);
+  if (tokenIndex === -1) return { text: rawText, link: null };
+
+  const visibleText = rawText.slice(0, tokenIndex).trim();
+  const jsonPart = rawText.slice(tokenIndex + PRODUCT_LINK_TOKEN.length).trim();
+
+  try {
+    const parsed = JSON.parse(jsonPart);
+    if (parsed && parsed.label && parsed.url && parsed.url.startsWith(PRODUCT_LINK_URL_PREFIX)) {
+      return { text: visibleText, link: { label: parsed.label, url: parsed.url } };
+    }
+  } catch (err) {
+    // Malformed token — just show the visible text, no button.
+  }
+
+  return { text: visibleText || rawText, link: null };
+}
+
+function toggleChatPanel() {
   panel.classList.toggle("hidden");
   if (!panel.classList.contains("hidden")) {
     ensureGreeting(currentMode);
     input.focus();
   }
-});
+}
 
-closeBtn.addEventListener("click", () => {
+document.addEventListener(
+  "click",
+  (event) => {
+    const clickedToggle = event.target.closest("#chat-toggle");
+    if (!clickedToggle || !widget.contains(clickedToggle)) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    toggleChatPanel();
+  },
+  true
+);
+
+closeBtn.addEventListener("click", (event) => {
+  event.preventDefault();
   panel.classList.add("hidden");
 });
 
@@ -135,9 +184,12 @@ form.addEventListener("submit", async (event) => {
 
     if (!response.ok) {
       addMessage(mode, "error", data.error || "Something went wrong. Please try again.");
+    } else if (mode === "chat") {
+      const leadStripped = captureLeadIfPresent(data.reply);
+      const { text: displayText, link } = extractProductLink(leadStripped);
+      addMessage(mode, "bot", displayText, link);
     } else {
-      const displayText = mode === "chat" ? captureLeadIfPresent(data.reply) : data.reply;
-      addMessage(mode, "bot", displayText);
+      addMessage(mode, "bot", data.reply);
     }
   } catch (err) {
     typingBubble.remove();

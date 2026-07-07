@@ -11,18 +11,21 @@ if (!defined('ABSPATH')) {
 }
 
 function ttc_chatbot_widget_enqueue_assets() {
+    $style_path = plugin_dir_path(__FILE__) . 'assets/style.css';
+    $script_path = plugin_dir_path(__FILE__) . 'assets/script.js';
+
     wp_enqueue_style(
         'ttc-chatbot-widget-style',
         plugins_url('assets/style.css', __FILE__),
         [],
-        '1.0.0'
+        file_exists($style_path) ? filemtime($style_path) : '1.0.0'
     );
 
     wp_enqueue_script(
         'ttc-chatbot-widget-script',
         plugins_url('assets/script.js', __FILE__),
         [],
-        '1.0.0',
+        file_exists($script_path) ? filemtime($script_path) : '1.0.0',
         true
     );
 }
@@ -31,15 +34,26 @@ add_action('wp_enqueue_scripts', 'ttc_chatbot_widget_enqueue_assets');
 function ttc_chatbot_widget_render_markup() {
     ?>
     <div id="chat-widget">
-      <button id="chat-toggle" aria-label="Open chat">💬</button>
+      <button id="chat-toggle" type="button" aria-label="Open chat">
+        <svg class="chat-toggle-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" />
+          <path d="M8 9h8" />
+          <path d="M8 13h5" />
+        </svg>
+      </button>
 
       <div id="chat-panel" class="hidden">
         <div class="chat-header">
           <div class="chat-tabs">
-            <button class="tab-btn active" data-mode="chat">Support</button>
-            <button class="tab-btn" data-mode="recipes">Recipe Ideas</button>
+            <button class="tab-btn active" type="button" data-mode="chat">Support</button>
+            <button class="tab-btn" type="button" data-mode="recipes">Recipe Ideas</button>
           </div>
-          <button id="chat-close" aria-label="Close chat">✕</button>
+          <button id="chat-close" type="button" aria-label="Close chat">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
         </div>
 
         <div id="chat-messages" class="chat-messages"></div>
