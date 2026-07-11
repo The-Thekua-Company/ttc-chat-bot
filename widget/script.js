@@ -176,6 +176,19 @@ function extractProductLink(rawText) {
   return { text: rawText, link: null };
 }
 
+function stripMarkdown(text) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/__(.+?)__/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/(?<!\w)_(.+?)_(?!\w)/g, "$1")
+    .replace(/^\s{0,3}#{1,6}\s+/gm, "")
+    .replace(/^\s*[-*]\s+/gm, "")
+    .replace(/^\s*\d+\.\s+/gm, "")
+    .replace(/[ \t]{2,}/g, " ")
+    .trim();
+}
+
 const TEASER_SESSION_KEY = "ttcChatTeaserShown";
 
 function hideTeaser() {
@@ -273,9 +286,9 @@ form.addEventListener("submit", async (event) => {
     } else if (mode === "chat") {
       const leadStripped = captureLeadIfPresent(data.reply);
       const { text: displayText, link } = extractProductLink(leadStripped);
-      addMessage(mode, "bot", displayText, link);
+      addMessage(mode, "bot", stripMarkdown(displayText), link);
     } else {
-      addMessage(mode, "bot", data.reply);
+      addMessage(mode, "bot", stripMarkdown(data.reply));
     }
   } catch (err) {
     typingBubble.remove();
