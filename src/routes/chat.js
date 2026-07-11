@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 
   try {
     const reply = await getChatReply(message.trim(), history);
-    logChatInteraction({ sessionId, mode: 'chat', userMessage: message.trim(), botReply: reply, username, ip }).catch(() => {});
+    await logChatInteraction({ sessionId, mode: 'chat', userMessage: message.trim(), botReply: reply, username, ip }).catch(() => {});
     res.json({ reply });
   } catch (error) {
     console.error('Error getting chat reply:', error);

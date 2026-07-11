@@ -19,7 +19,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const reply = await getRecipeSuggestion(message.trim());
-    logChatInteraction({ sessionId, mode: 'recipes', userMessage: message.trim(), botReply: reply, username, ip }).catch(() => {});
+    await logChatInteraction({ sessionId, mode: 'recipes', userMessage: message.trim(), botReply: reply, username, ip }).catch(() => {});
     res.json({ reply });
   } catch (error) {
     console.error('Error getting recipe suggestion:', error);
