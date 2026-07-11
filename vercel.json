@@ -5,6 +5,7 @@
     "api/lead.js": { "maxDuration": 15 },
     "api/recipes.js": { "maxDuration": 30, "includeFiles": "knowledge-base/**" },
     "api/health.js": { "maxDuration": 5 },
-    "api/admin/logs.js": { "maxDuration": 10 }
+    "api/admin/logs.js": { "maxDuration": 10 },
+    "api/admin/sessions.js": { "maxDuration": 10 }
   }
 }

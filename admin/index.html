@@ -18,51 +18,54 @@
 
   <div id="dashboard" class="dashboard hidden">
     <header class="dashboard-header">
-      <h1>Chat Log History</h1>
+      <h1>Chat Sessions</h1>
       <button id="logout-btn" type="button">Log out</button>
     </header>
 
-    <div class="filters">
-      <label>
-        Date
-        <input id="filter-date" type="date" />
-      </label>
-      <label>
-        Mode
-        <select id="filter-mode">
-          <option value="">All</option>
-          <option value="chat">Support</option>
-          <option value="recipes">Recipe Ideas</option>
-        </select>
-      </label>
-      <label>
-        Search
-        <input id="filter-search" type="text" placeholder="Search message or reply..." />
-      </label>
-      <button id="apply-filters-btn" type="button">Apply</button>
+    <div id="sessions-view">
+      <div class="filters">
+        <label>
+          Date
+          <input id="filter-date" type="date" />
+        </label>
+        <label>
+          Mode
+          <select id="filter-mode">
+            <option value="">All</option>
+            <option value="chat">Support</option>
+            <option value="recipes">Recipe Ideas</option>
+          </select>
+        </label>
+        <button id="apply-filters-btn" type="button">Apply</button>
+      </div>
+
+      <div id="sessions-meta" class="results-meta"></div>
+
+      <table class="logs-table">
+        <thead>
+          <tr>
+            <th>Started</th>
+            <th>Last message</th>
+            <th>Messages</th>
+            <th>User</th>
+            <th>Mode</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody id="sessions-tbody"></tbody>
+      </table>
+
+      <div class="pagination">
+        <button id="prev-page-btn" type="button">&larr; Prev</button>
+        <span id="page-indicator"></span>
+        <button id="next-page-btn" type="button">Next &rarr;</button>
+      </div>
     </div>
 
-    <div id="results-meta" class="results-meta"></div>
-
-    <table class="logs-table">
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Session</th>
-          <th>Mode</th>
-          <th>User</th>
-          <th>Message</th>
-          <th>Reply</th>
-          <th>Location</th>
-        </tr>
-      </thead>
-      <tbody id="logs-tbody"></tbody>
-    </table>
-
-    <div class="pagination">
-      <button id="prev-page-btn" type="button">&larr; Prev</button>
-      <span id="page-indicator"></span>
-      <button id="next-page-btn" type="button">Next &rarr;</button>
+    <div id="thread-view" class="hidden">
+      <button id="back-to-sessions-btn" type="button">&larr; Back to sessions</button>
+      <div id="thread-meta" class="thread-meta"></div>
+      <div id="thread-messages" class="thread-messages"></div>
     </div>
   </div>
 

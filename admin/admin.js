@@ -1,5 +1,6 @@
 const PASSWORD_STORAGE_KEY = "ttcAdminPassword";
-const API_URL = "/api/admin/logs";
+const SESSIONS_API_URL = "/api/admin/sessions";
+const LOGS_API_URL = "/api/admin/logs";
 
 const loginScreen = document.getElementById("login-screen");
 const loginForm = document.getElementById("login-form");
@@ -8,21 +9,25 @@ const loginError = document.getElementById("login-error");
 const dashboard = document.getElementById("dashboard");
 const logoutBtn = document.getElementById("logout-btn");
 
+const sessionsView = document.getElementById("sessions-view");
+const threadView = document.getElementById("thread-view");
+
 const filterDate = document.getElementById("filter-date");
 const filterMode = document.getElementById("filter-mode");
-const filterSearch = document.getElementById("filter-search");
 const applyFiltersBtn = document.getElementById("apply-filters-btn");
-const resultsMeta = document.getElementById("results-meta");
-const logsTbody = document.getElementById("logs-tbody");
+const sessionsMeta = document.getElementById("sessions-meta");
+const sessionsTbody = document.getElementById("sessions-tbody");
 const prevPageBtn = document.getElementById("prev-page-btn");
 const nextPageBtn = document.getElementById("next-page-btn");
 const pageIndicator = document.getElementById("page-indicator");
 
+const backToSessionsBtn = document.getElementById("back-to-sessions-btn");
+const threadMeta = document.getElementById("thread-meta");
+const threadMessages = document.getElementById("thread-messages");
+
 let currentPage = 1;
 let currentTotal = 0;
-let currentPageSize = 50;
-let highlightedSession = null;
-let lastRows = [];
+let currentPageSize = 30;
 
 function getStoredPassword() {
   try {
@@ -35,9 +40,7 @@ function getStoredPassword() {
 function storePassword(password) {
   try {
     localStorage.setItem(PASSWORD_STORAGE_KEY, password);
-  } catch (err) {
-    // Storage unavailable — session will require re-login next load.
-  }
+  } catch (err) {}
 }
 
 function clearStoredPassword() {
@@ -49,7 +52,7 @@ function clearStoredPassword() {
 function showDashboard() {
   loginScreen.classList.add("hidden");
   dashboard.classList.remove("hidden");
-  loadLogs();
+  showSessionsView();
 }
 
 function showLogin(errorMessage) {
@@ -63,14 +66,22 @@ function showLogin(errorMessage) {
   }
 }
 
-async function fetchLogs(password, params) {
-  const query = new URLSearchParams();
-  if (params.date) query.set("date", params.date);
-  if (params.mode) query.set("mode", params.mode);
-  if (params.sessionId) query.set("sessionId", params.sessionId);
-  query.set("page", params.page || 1);
+function showSessionsView() {
+  threadView.classList.add("hidden");
+  sessionsView.classList.remove("hidden");
+  loadSessions();
+}
 
-  const response = await fetch(`${API_URL}?${query.toString()}`, {
+function showThreadView() {
+  sessionsView.classList.add("hidden");
+  threadView.classList.remove("hidden");
+}
+
+async function authorizedFetch(url) {
+  const password = getStoredPassword();
+  if (!password) throw new Error("unauthorized");
+
+  const response = await fetch(url, {
     headers: { "x-admin-password": password },
   });
 
@@ -84,100 +95,123 @@ async function fetchLogs(password, params) {
   return response.json();
 }
 
-function renderRows(rows, searchText) {
-  logsTbody.innerHTML = "";
-  const lowerSearch = (searchText || "").toLowerCase();
+function handleFetchError(err, metaEl) {
+  if (err.message === "unauthorized") {
+    clearStoredPassword();
+    showLogin("Incorrect password.");
+  } else if (metaEl) {
+    metaEl.textContent = "Could not load data. Please try again.";
+  }
+}
 
-  const filtered = lowerSearch
-    ? rows.filter(
-        (row) =>
-          (row.user_message || "").toLowerCase().includes(lowerSearch) ||
-          (row.bot_reply || "").toLowerCase().includes(lowerSearch)
-      )
-    : rows;
+async function loadSessions() {
+  const params = new URLSearchParams();
+  if (filterDate.value) params.set("date", filterDate.value);
+  if (filterMode.value) params.set("mode", filterMode.value);
+  params.set("page", currentPage);
 
-  filtered.forEach((row) => {
+  sessionsMeta.textContent = "Loading...";
+
+  try {
+    const result = await authorizedFetch(`${SESSIONS_API_URL}?${params.toString()}`);
+    currentTotal = result.total || 0;
+    currentPageSize = result.pageSize || 30;
+    renderSessions(result.rows || []);
+
+    const totalPages = Math.max(1, Math.ceil(currentTotal / currentPageSize));
+    sessionsMeta.textContent = `${currentTotal} session${currentTotal === 1 ? "" : "s"}`;
+    pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+    prevPageBtn.disabled = currentPage <= 1;
+    nextPageBtn.disabled = currentPage >= totalPages;
+  } catch (err) {
+    handleFetchError(err, sessionsMeta);
+  }
+}
+
+function renderSessions(rows) {
+  sessionsTbody.innerHTML = "";
+
+  rows.forEach((row) => {
     const tr = document.createElement("tr");
-    if (row.session_id === highlightedSession) {
-      tr.classList.add("session-highlight");
-    }
+    tr.className = "session-row";
+    tr.title = "Click to view full conversation";
 
-    const timeTd = document.createElement("td");
-    timeTd.textContent = new Date(row.created_at).toLocaleString();
-    tr.appendChild(timeTd);
+    const startedTd = document.createElement("td");
+    startedTd.textContent = new Date(row.started_at).toLocaleString();
+    tr.appendChild(startedTd);
 
-    const sessionTd = document.createElement("td");
-    sessionTd.className = "session-cell";
-    sessionTd.textContent = row.session_id || "";
-    sessionTd.title = "Click to highlight this session";
-    sessionTd.addEventListener("click", () => {
-      highlightedSession = highlightedSession === row.session_id ? null : row.session_id;
-      renderRows(rows, filterSearch.value.trim());
-    });
-    tr.appendChild(sessionTd);
+    const lastTd = document.createElement("td");
+    lastTd.textContent = new Date(row.last_message_at).toLocaleString();
+    tr.appendChild(lastTd);
 
-    const modeTd = document.createElement("td");
-    modeTd.textContent = row.mode || "";
-    tr.appendChild(modeTd);
+    const countTd = document.createElement("td");
+    countTd.textContent = row.message_count;
+    tr.appendChild(countTd);
 
     const userTd = document.createElement("td");
     userTd.textContent = row.username || "—";
     tr.appendChild(userTd);
 
-    const messageTd = document.createElement("td");
-    messageTd.className = "message-cell";
-    messageTd.textContent = row.user_message || "";
-    tr.appendChild(messageTd);
-
-    const replyTd = document.createElement("td");
-    replyTd.className = "reply-cell";
-    replyTd.textContent = row.bot_reply || "";
-    tr.appendChild(replyTd);
+    const modeTd = document.createElement("td");
+    modeTd.textContent = row.mode || "";
+    tr.appendChild(modeTd);
 
     const locationTd = document.createElement("td");
     const locationParts = [row.city, row.region, row.country].filter(Boolean);
     locationTd.textContent = locationParts.length ? locationParts.join(", ") : "—";
     tr.appendChild(locationTd);
 
-    logsTbody.appendChild(tr);
+    tr.addEventListener("click", () => openThread(row.session_id));
+    sessionsTbody.appendChild(tr);
   });
 }
 
-async function loadLogs() {
-  const password = getStoredPassword();
-  if (!password) {
-    showLogin();
-    return;
-  }
-
-  const params = {
-    date: filterDate.value,
-    mode: filterMode.value,
-    page: currentPage,
-  };
-
-  resultsMeta.textContent = "Loading...";
+async function openThread(sessionId) {
+  showThreadView();
+  threadMeta.textContent = "Loading conversation...";
+  threadMessages.innerHTML = "";
 
   try {
-    const result = await fetchLogs(password, params);
-    currentTotal = result.total || 0;
-    currentPageSize = result.pageSize || 50;
-    lastRows = result.rows || [];
-    renderRows(lastRows, filterSearch.value.trim());
+    const result = await authorizedFetch(
+      `${LOGS_API_URL}?sessionId=${encodeURIComponent(sessionId)}&order=asc&page=1`
+    );
+    const rows = result.rows || [];
 
-    const totalPages = Math.max(1, Math.ceil(currentTotal / currentPageSize));
-    resultsMeta.textContent = `${currentTotal} total log${currentTotal === 1 ? "" : "s"}`;
-    pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
-    prevPageBtn.disabled = currentPage <= 1;
-    nextPageBtn.disabled = currentPage >= totalPages;
-  } catch (err) {
-    if (err.message === "unauthorized") {
-      clearStoredPassword();
-      showLogin("Incorrect password.");
-    } else {
-      resultsMeta.textContent = "Could not load logs. Please try again.";
+    if (!rows.length) {
+      threadMeta.textContent = "No messages found for this session.";
+      return;
     }
+
+    const first = rows[0];
+    const locationParts = [first.city, first.region, first.country].filter(Boolean);
+    threadMeta.textContent = `${first.username || "Anonymous"} · ${
+      locationParts.length ? locationParts.join(", ") : "Unknown location"
+    } · ${rows.length} message${rows.length === 1 ? "" : "s"}`;
+
+    rows.forEach((row) => {
+      threadMessages.appendChild(buildThreadBubble("user", row.user_message, row.created_at));
+      threadMessages.appendChild(buildThreadBubble("bot", row.bot_reply, row.created_at));
+    });
+  } catch (err) {
+    handleFetchError(err, threadMeta);
   }
+}
+
+function buildThreadBubble(role, text, timestamp) {
+  const bubble = document.createElement("div");
+  bubble.className = `thread-bubble ${role}`;
+
+  const textEl = document.createElement("div");
+  textEl.className = "thread-bubble-text";
+  textEl.textContent = text;
+  bubble.appendChild(textEl);
+
+  const timeEl = document.createElement("div");
+  timeEl.className = "thread-bubble-time";
+  timeEl.textContent = new Date(timestamp).toLocaleString();
+  bubble.appendChild(timeEl);
+
+  return bubble;
 }
 
 loginForm.addEventListener("submit", async (event) => {
@@ -185,12 +219,14 @@ loginForm.addEventListener("submit", async (event) => {
   const password = passwordInput.value.trim();
   if (!password) return;
 
+  storePassword(password);
+
   try {
-    await fetchLogs(password, { page: 1 });
-    storePassword(password);
+    await authorizedFetch(`${SESSIONS_API_URL}?page=1`);
     passwordInput.value = "";
     showDashboard();
   } catch (err) {
+    clearStoredPassword();
     loginError.textContent = "Incorrect password.";
     loginError.classList.remove("hidden");
   }
@@ -203,17 +239,13 @@ logoutBtn.addEventListener("click", () => {
 
 applyFiltersBtn.addEventListener("click", () => {
   currentPage = 1;
-  loadLogs();
-});
-
-filterSearch.addEventListener("input", () => {
-  renderRows(lastRows, filterSearch.value.trim());
+  loadSessions();
 });
 
 prevPageBtn.addEventListener("click", () => {
   if (currentPage > 1) {
     currentPage -= 1;
-    loadLogs();
+    loadSessions();
   }
 });
 
@@ -221,8 +253,12 @@ nextPageBtn.addEventListener("click", () => {
   const totalPages = Math.max(1, Math.ceil(currentTotal / currentPageSize));
   if (currentPage < totalPages) {
     currentPage += 1;
-    loadLogs();
+    loadSessions();
   }
+});
+
+backToSessionsBtn.addEventListener("click", () => {
+  showSessionsView();
 });
 
 if (getStoredPassword()) {

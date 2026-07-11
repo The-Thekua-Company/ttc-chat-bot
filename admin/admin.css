@@ -154,25 +154,65 @@ body {
   font-weight: 600;
 }
 
-.logs-table td.session-cell {
-  font-family: monospace;
-  font-size: 11px;
-  color: #8a4b1f;
+.logs-table tr.session-row {
   cursor: pointer;
-  max-width: 90px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-.logs-table td.message-cell,
-.logs-table td.reply-cell {
-  max-width: 320px;
+.logs-table tr.session-row:hover {
+  background: #fdf3e3;
+}
+
+.thread-meta {
+  font-size: 13px;
+  color: #6b5c4a;
+  margin: 12px 0 16px;
+}
+
+#back-to-sessions-btn {
+  padding: 8px 14px;
+  border: 1px solid #d8c7b0;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.thread-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.thread-bubble {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.thread-bubble.user {
+  align-self: flex-end;
+  background: #b5541a;
+  color: #fff;
+  border-bottom-right-radius: 2px;
+}
+
+.thread-bubble.bot {
+  align-self: flex-start;
+  background: #fff;
+  border: 1px solid #f0e6d6;
+  border-bottom-left-radius: 2px;
+}
+
+.thread-bubble-text {
   white-space: pre-wrap;
 }
 
-.logs-table tr.session-highlight {
-  background: #fdf3e3;
+.thread-bubble-time {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-top: 6px;
 }
 
 .pagination {

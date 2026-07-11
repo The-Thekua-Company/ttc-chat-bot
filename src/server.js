@@ -7,6 +7,7 @@ const chatRouter = require('./routes/chat');
 const recipesRouter = require('./routes/recipes');
 const leadRouter = require('./routes/lead');
 const adminLogsRouter = require('./routes/adminLogs');
+const adminSessionsRouter = require('./routes/adminSessions');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/chat', apiLimiter, chatRouter);
 app.use('/recipes', recipesRouter);
 app.use('/lead', apiLimiter, leadRouter);
 app.use('/api/admin/logs', adminLogsRouter);
+app.use('/api/admin/sessions', adminSessionsRouter);
 app.use('/admin', express.static('admin'));
 
 app.listen(config.port, () => {

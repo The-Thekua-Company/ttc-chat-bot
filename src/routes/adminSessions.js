@@ -1,5 +1,5 @@
 const express = require('express');
-const { queryChatLogs } = require('../services/chatLogQuery');
+const { querySessions } = require('../services/chatSessionQuery');
 
 const router = express.Router();
 
@@ -9,14 +9,14 @@ router.get('/', async (req, res) => {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const { date, mode, sessionId, page, order } = req.query;
+  const { date, mode, page } = req.query;
 
   try {
-    const result = await queryChatLogs({ date, mode, sessionId, page, order });
+    const result = await querySessions({ date, mode, page });
     res.json(result);
   } catch (error) {
-    console.error('Error fetching chat logs:', error);
-    res.status(500).json({ error: 'Something went wrong while fetching logs.' });
+    console.error('Error fetching chat sessions:', error);
+    res.status(500).json({ error: 'Something went wrong while fetching sessions.' });
   }
 });
 
