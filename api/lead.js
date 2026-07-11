@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const twilio = require('twilio');
 const { checkRateLimit } = require('../src/services/rateLimit');
 
-async function sendLeadEmail({ name, contact, message, timestamp }) {
+async function sendLeadEmail({ name, contact, message, timestamp, sessionId }) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.hostinger.com',
     port: 465,
@@ -17,17 +17,17 @@ async function sendLeadEmail({ name, contact, message, timestamp }) {
     from: process.env.HOSTINGER_EMAIL,
     to: 'support@thekuacompany.com',
     subject: `New Corporate Gifting Lead — ${name}`,
-    text: `Name: ${name}\nContact: ${contact}\nTime: ${timestamp}\nMessage: ${message}`,
+    text: `Name: ${name}\nContact: ${contact}\nTime: ${timestamp}\nMessage: ${message}\nSession: ${sessionId || 'unknown'}`,
   });
 }
 
-async function sendLeadWhatsApp({ name, contact, timestamp }) {
+async function sendLeadWhatsApp({ name, contact, timestamp, sessionId }) {
   const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
   await client.messages.create({
     from: process.env.TWILIO_WHATSAPP_FROM,
     to: process.env.TWILIO_WHATSAPP_TO,
-    body: `New corporate gifting lead from TTC chatbot. Name: ${name}. Contact: ${contact}. Time: ${timestamp}`,
+    body: `New corporate gifting lead from TTC chatbot. Name: ${name}. Contact: ${contact}. Time: ${timestamp}. Session: ${sessionId || 'unknown'}`,
   });
 }
 
@@ -46,7 +46,7 @@ module.exports = async function handler(req, res) {
     return res.status(429).json({ error: 'Too many requests. Please wait a few minutes and try again.' });
   }
 
-  const { name, contact, message } = req.body;
+  const { name, contact, message, sessionId } = req.body;
 
   if (typeof name !== 'string' || name.trim() === '' || typeof contact !== 'string' || contact.trim() === '') {
     return res.status(400).json({ error: 'name and contact are required and must be non-empty strings' });
@@ -57,6 +57,7 @@ module.exports = async function handler(req, res) {
     contact: contact.trim(),
     message: typeof message === 'string' && message.trim() !== '' ? message.trim() : 'Corporate gifting inquiry via chatbot',
     timestamp: new Date().toISOString(),
+    sessionId: typeof sessionId === 'string' ? sessionId : undefined,
   };
 
   try {

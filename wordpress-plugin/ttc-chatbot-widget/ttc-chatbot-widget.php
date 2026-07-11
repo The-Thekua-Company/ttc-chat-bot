@@ -28,6 +28,10 @@ function ttc_chatbot_widget_enqueue_assets() {
         file_exists($script_path) ? filemtime($script_path) : '1.0.0',
         true
     );
+
+    wp_localize_script('ttc-chatbot-widget-script', 'ttcChatbotData', [
+        'username' => is_user_logged_in() ? wp_get_current_user()->display_name : null,
+    ]);
 }
 add_action('wp_enqueue_scripts', 'ttc_chatbot_widget_enqueue_assets');
 

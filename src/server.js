@@ -6,6 +6,7 @@ const config = require('./config');
 const chatRouter = require('./routes/chat');
 const recipesRouter = require('./routes/recipes');
 const leadRouter = require('./routes/lead');
+const adminLogsRouter = require('./routes/adminLogs');
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.get('/health', (req, res) => {
 app.use('/chat', apiLimiter, chatRouter);
 app.use('/recipes', recipesRouter);
 app.use('/lead', apiLimiter, leadRouter);
+app.use('/api/admin/logs', adminLogsRouter);
+app.use('/admin', express.static('admin'));
 
 app.listen(config.port, () => {
   console.log(`Server running on port ${config.port}`);

@@ -91,7 +91,7 @@ function captureLeadIfPresent(rawText) {
       fetch(`${BACKEND_URL}/api/lead`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: lead.name, contact: lead.contact }),
+        body: JSON.stringify({ name: lead.name, contact: lead.contact, sessionId }),
       }).catch(() => {});
     }
   } catch (err) {
@@ -175,6 +175,24 @@ function extractProductLink(rawText) {
 
   return { text: rawText, link: null };
 }
+
+const SESSION_ID_KEY = "ttcChatSessionId";
+
+function getSessionId() {
+  try {
+    let id = sessionStorage.getItem(SESSION_ID_KEY);
+    if (!id) {
+      id = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      sessionStorage.setItem(SESSION_ID_KEY, id);
+    }
+    return id;
+  } catch (err) {
+    return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+}
+
+const sessionId = getSessionId();
+const wpUsername = (typeof window !== "undefined" && window.ttcChatbotData && window.ttcChatbotData.username) || null;
 
 function stripMarkdown(text) {
   return text
@@ -270,7 +288,10 @@ form.addEventListener("submit", async (event) => {
   const typingBubble = renderMessage("typing", "...");
 
   try {
-    const requestBody = mode === "chat" ? { message, history: historyForRequest } : { message };
+    const requestBody =
+      mode === "chat"
+        ? { message, history: historyForRequest, sessionId, username: wpUsername }
+        : { message, sessionId, username: wpUsername };
 
     const response = await fetch(`${BACKEND_URL}${ENDPOINTS[mode]}`, {
       method: "POST",

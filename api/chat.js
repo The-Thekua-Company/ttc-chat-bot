@@ -1,5 +1,6 @@
 const { getChatReply } = require('../src/services/claude');
 const { checkRateLimit } = require('../src/services/rateLimit');
+const { logChatInteraction } = require('../src/services/chatLogger');
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,7 +17,7 @@ module.exports = async function handler(req, res) {
     return res.status(429).json({ error: 'Too many requests. Please wait a few minutes and try again.' });
   }
 
-  const { message, history = [] } = req.body;
+  const { message, history = [], sessionId, username } = req.body;
 
   if (typeof message !== 'string' || message.trim() === '') {
     return res.status(400).json({ error: 'message is required and must be a non-empty string' });
@@ -24,6 +25,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const reply = await getChatReply(message.trim(), history);
+    logChatInteraction({ sessionId, mode: 'chat', userMessage: message.trim(), botReply: reply, username, ip }).catch(() => {});
     res.json({ reply });
   } catch (error) {
     console.error('Error getting chat reply:', error);

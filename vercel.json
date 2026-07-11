@@ -4,6 +4,7 @@
     "api/chat.js": { "maxDuration": 30, "includeFiles": "knowledge-base/**" },
     "api/lead.js": { "maxDuration": 15 },
     "api/recipes.js": { "maxDuration": 30, "includeFiles": "knowledge-base/**" },
-    "api/health.js": { "maxDuration": 5 }
+    "api/health.js": { "maxDuration": 5 },
+    "api/admin/logs.js": { "maxDuration": 10 }
   }
 }

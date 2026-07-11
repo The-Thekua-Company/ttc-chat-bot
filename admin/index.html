@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TTC Chatbot — Admin</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div id="login-screen" class="login-screen">
+    <form id="login-form" class="login-form">
+      <h1>Admin Login</h1>
+      <input id="password-input" type="password" placeholder="Admin password" autocomplete="current-password" />
+      <button type="submit">Enter</button>
+      <p id="login-error" class="login-error hidden">Incorrect password.</p>
+    </form>
+  </div>
+
+  <div id="dashboard" class="dashboard hidden">
+    <header class="dashboard-header">
+      <h1>Chat Log History</h1>
+      <button id="logout-btn" type="button">Log out</button>
+    </header>
+
+    <div class="filters">
+      <label>
+        Date
+        <input id="filter-date" type="date" />
+      </label>
+      <label>
+        Mode
+        <select id="filter-mode">
+          <option value="">All</option>
+          <option value="chat">Support</option>
+          <option value="recipes">Recipe Ideas</option>
+        </select>
+      </label>
+      <label>
+        Search
+        <input id="filter-search" type="text" placeholder="Search message or reply..." />
+      </label>
+      <button id="apply-filters-btn" type="button">Apply</button>
+    </div>
+
+    <div id="results-meta" class="results-meta"></div>
+
+    <table class="logs-table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Session</th>
+          <th>Mode</th>
+          <th>User</th>
+          <th>Message</th>
+          <th>Reply</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody id="logs-tbody"></tbody>
+    </table>
+
+    <div class="pagination">
+      <button id="prev-page-btn" type="button">&larr; Prev</button>
+      <span id="page-indicator"></span>
+      <button id="next-page-btn" type="button">Next &rarr;</button>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
