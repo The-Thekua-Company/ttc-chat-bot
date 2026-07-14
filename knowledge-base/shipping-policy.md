@@ -8,9 +8,10 @@ Source: https://thekuacompany.com/shipping-policy/
 
 Every pack of Thekua is made **fresh after your order is placed**. This means there is a preparation window before dispatch — orders are not dispatched from pre-made stock.
 
-**Preparation time:** 1–3 business days (the time taken by homemakers to prepare the batch after the order is received)  
+**Preparation time:** 1–3 business days (the time taken by homemakers to prepare the batch after the order is received). Orders placed after 12 PM IST are processed the next working day.  
 **Dispatch:** After preparation is complete  
-**Delivery after dispatch:** 5–12 days, depending on location across India
+**Delivery after dispatch:** 5–12 days, depending on location across India  
+**Delivery partners:** Delhivery, Blue Dart, DTDC, Xpressbees, and other leading national couriers
 
 ### Total estimated time from order to delivery:
 - **Minimum:** ~6–8 days (faster delivery zones)
@@ -21,6 +22,14 @@ Every pack of Thekua is made **fresh after your order is placed**. This means th
 ## Delivery Coverage
 
 Thekua is delivered **pan-India** — across all states and union territories in India.
+
+## International Shipping
+
+The Thekua Company currently ships to select international destinations. Delivery timelines range 10–20 business days depending on the destination. Customs duties, VAT, or import taxes (if applicable) are to be borne by the customer.
+
+## Legal Compliance
+
+In accordance with the Consumer Protection (E-Commerce) Rules, 2020 and Legal Metrology (Packaged Commodities) Rules, 2011, every order shipped includes manufacturer & marketer details, FSSAI license number, MRP (inclusive of all taxes), net quantity, manufacture date, and batch code.
 
 ---
 

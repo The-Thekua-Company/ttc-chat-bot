@@ -27,10 +27,10 @@ The sancha is a hand-carved wooden mould used to press the Thekua dough into a r
 ## Products & Ordering
 
 **What sizes are available?**  
-- 250g Everyday Pack — 8+ pieces — ₹229 to ₹279
-- 500g Family Pack — 16–20 pieces — ₹449 to ₹599
-- 1kg Large Family Pack — 35–40 pieces — ₹849 to ₹999
-- 2kg Bulk/Sharing Pack — ₹1,599 to ₹1,789
+- 250g Everyday Pack — 8–10 pieces — ₹229 to ₹279
+- 500g Family Pack — 16–20 pieces — ₹449 to ₹489
+- 1kg Large Family Pack — 30–35 pieces — ₹849 to ₹879
+- 2kg Bulk/Sharing Pack — 60–70 pieces — ₹1,599 to ₹1,669
 
 **What variants are available?**  
 All sizes come in two sweetener variants: Jaggery and Sugar.
@@ -78,13 +78,13 @@ Chakki atta (stone-ground whole wheat flour), block jaggery or sugar, pure desi 
 Thekua contains wheat (gluten), dairy (ghee), and coconut. It does not contain nuts or artificial additives unless specified.
 
 **Is Thekua healthy?**  
-Thekua is made from four real, minimally processed ingredients. It is significantly better than biscuits and packaged snacks made from maida, refined sugar, and palm oil. It provides fibre (from whole wheat and coconut), iron, potassium, magnesium (from jaggery), B vitamins (from whole wheat), and fat-soluble vitamins and butyric acid (from ghee). However, it is a fried sweet with approximately 160–170 calories per piece. It is a better everyday snack — not a health supplement.
+Thekua is made from four real, minimally processed ingredients. It is significantly better than biscuits and packaged snacks made from maida, refined sugar, and palm oil. It provides fibre (from whole wheat and coconut), iron, potassium, magnesium (from jaggery), B vitamins (from whole wheat), and fat-soluble vitamins and butyric acid (from ghee). However, it is a fried sweet with approximately 80–110 calories per piece. It is a better everyday snack — not a health supplement.
 
 **How many calories are in one Thekua?**  
-Approximately 160–170 calories per piece (~35g). Similar in calories to two Parle-G biscuits, but made from whole wheat, jaggery, and ghee instead of maida, refined sugar, and palm oil.
+Approximately 80–110 calories per piece (20–24g, depending on size — jaggery variant runs slightly lower at ~81–97 kcal, sugar variant slightly higher at ~93–111 kcal). Made from whole wheat, jaggery, and ghee instead of maida, refined sugar, and palm oil.
 
 **Is Thekua suitable for diabetics?**  
-Jaggery has a moderately lower glycemic index than refined sugar (~50–65 vs ~65–70), meaning a somewhat slower blood sugar rise. However, jaggery still raises blood sugar — it is a sweetener. Diabetics should consult their doctor before consuming. The company does not position Thekua as "diabetic-friendly."
+Jaggery is less processed than white sugar, but its glycemic index (~84) is actually higher than white sugar's (~65), meaning it can raise blood sugar levels more quickly, not more slowly. Diabetics should consult their doctor before consuming and manage portions accordingly. The company does not position Thekua as "diabetic-friendly."
 
 **Is jaggery better than refined sugar?**  
 Yes, in terms of nutrition. Jaggery retains trace minerals — iron (~11.4mg/100g), potassium (~1000mg/100g), magnesium (~70–90mg/100g) — that are stripped from white sugar during refining. However, jaggery is still a sweetener and still raises blood sugar. "Better than refined sugar" is not the same as "healthy."
@@ -114,21 +114,24 @@ Shipping is calculated at checkout based on your delivery location and order siz
 **Will I get tracking information?**  
 Yes, tracking details are shared once the order is dispatched.
 
+**Do you ship internationally?**  
+Yes, to select international destinations. Delivery timelines range 10–20 business days depending on the destination. Customs duties, VAT, or import taxes (if applicable) are borne by the customer.
+
 ---
 
 ## Refunds & Returns
 
 **What is the return policy?**  
-Thekua is a perishable food product. Returns are accepted only for damaged, wrong, or quality-defective products — not for change of mind or taste preference.
+Thekua is a perishable food product. Returns are accepted only for damaged, wrong, or quality-defective products — not for change of mind or taste preference. Bulk, custom, and corporate gifting orders are final sale unless the product is defective.
 
 **How do I raise a refund/replacement request?**  
 Contact the team within 48 hours of delivery with photo or video proof of the issue and your order number. Email: support@thekuacompany.com or WhatsApp: +91 8904993884.
 
 **Can I cancel my order?**  
-Cancellations are possible before preparation begins. Since preparation typically starts within 24 hours of order placement, contact the team immediately if you need to cancel. After preparation or dispatch, cancellation is not possible.
+You can request a cancellation or address change within 2 hours of placing the order. After that window, or once the order is dispatched, cancellation is not possible.
 
 **When will I receive my refund?**  
-Approved refunds are returned to your original payment method within 5–7 business days.
+Approved refunds are returned to your original payment method within 10 business days (your bank or card issuer may take additional time).
 
 ---
 

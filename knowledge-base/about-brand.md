@@ -2,7 +2,7 @@
 
 ## What We Are
 
-The Thekua Company is an online store selling handmade Thekua — a traditional fried sweet from the Mithila region of northern Bihar and southern Nepal. Every pack is made fresh after each order by Mithila homemakers, using only three to four ingredients: whole wheat flour (chakki atta), jaggery or sugar, pure desi ghee, and dried grated coconut (in the Mithila recipe). No preservatives. No factory. No pre-made stock.
+The Thekua Company is an online store selling handmade Thekua — a traditional fried sweet from the Mithila region of northern Bihar and southern Nepal. Every pack is made fresh after each order by Mithila homemakers, using only four ingredients: whole wheat flour (chakki atta), jaggery or sugar, pure desi ghee, and dried grated coconut (the Mithila-specific detail). No preservatives. No factory. No pre-made stock.
 
 The company is an in-house brand of **Magadh House Private Limited**, registered in Bangalore, Karnataka.
 

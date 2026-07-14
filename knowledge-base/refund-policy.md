@@ -23,6 +23,8 @@ Refunds or replacements are considered in the following cases:
 - Dislike of taste (subjective preference)
 - Products that have been partially consumed
 - Claims made after 48 hours of delivery without photo/video evidence
+- Bulk, custom, or corporate gifting orders (final sale, unless the product is defective)
+- Packages undeliverable due to incorrect addresses or repeated failed delivery attempts
 
 ---
 
@@ -40,17 +42,15 @@ The team will review your request and respond. If approved, a replacement or ref
 ## Refund Processing
 
 - Approved refunds are returned to the **original payment method**
-- Processing time: **5–7 business days** after approval (bank processing times may vary)
-- If you don't see the refund after 7 business days, check your bank account, then contact your bank or card issuer before reaching out to us
+- Processing time: **10 business days** after approval (bank processing times may vary)
+- If you don't see the refund after 10 business days, check your bank account, then contact your bank or card issuer before reaching out to us
 
 ---
 
 ## Order Cancellations
 
-- **Before preparation begins:** You may cancel your order and receive a full refund. Contact us immediately at support@thekuacompany.com or +91 8904993884.
-- **After preparation has begun or after dispatch:** Cancellation is not possible as the product has been freshly made to your order.
-
-Since every pack is made fresh after the order, preparation typically begins within 24 hours of order placement.
+- **Within 2 hours of placing the order:** You may request a cancellation or address change and receive a full refund. Contact us immediately at support@thekuacompany.com or +91 8904993884.
+- **After 2 hours, or once the order is dispatched:** Cancellation or address changes are not possible, as the product is freshly made to your order.
 
 ---
 

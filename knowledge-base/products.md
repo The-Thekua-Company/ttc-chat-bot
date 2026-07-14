@@ -25,17 +25,25 @@ The smallest and most beginner-friendly pack. Perfect if you're trying Thekua fo
 - Once opened, reseal to retain crunch and aroma
 - Delivers pan-India
 
-### Nutrition (per 100g, approximate)
+### Nutrition (per 100g)
 | Nutrient | Jaggery Variant | Sugar Variant |
 |---|---|---|
-| Calories | ~430–450 kcal | ~440–460 kcal |
-| Carbohydrates | ~55–60g | ~57–62g |
-| Protein | ~6–7g | ~6–7g |
-| Fat | ~20–22g | ~20–22g |
-| Fibre | ~4–5g | ~4–5g |
-| Iron | ~3–4mg | ~1–2mg |
+| Energy | 405 kcal | 464 kcal |
+| Protein | 8.3g | 7.3g |
+| Carbohydrates | 69.0g | 60.5g |
+| Total Sugars | 33.7g | 25.5g |
+| Added Sugars | 31.2g | 22.7g |
+| Total Fat | 7.5g | 18.6g |
+| Saturated Fat | 4.0g | 11.1g |
+| Trans Fat | 0g | 0g |
+| Dietary Fibre | 7.0g | 6.4g |
+| Sodium | <10mg | <10mg |
 
-**Per piece (~35g):** ~160–170 kcal, ~22–24g carbs, ~7–8g fat, ~2–3g protein, ~1.5–2g fibre, ~1–1.5mg iron
+**Per piece (20–24g):**
+- Jaggery variant: ~81–97 kcal, ~14–17g carbs, ~1.5–1.8g fat, ~1.7–2.0g protein, ~1.4–1.7g fibre
+- Sugar variant: ~93–111 kcal, ~12–15g carbs, ~3.7–4.5g fat, ~1.5–1.8g protein, ~1.3–1.5g fibre
+
+Note: piece weight varies 20–24g depending on size (hand-shaped, not machine-uniform); figures above are the proportional range across that weight band, not a fixed single value.
 
 ### Use cases
 - Daily chai-time snack
@@ -47,7 +55,7 @@ The smallest and most beginner-friendly pack. Perfect if you're trying Thekua fo
 ## 2. Handmade Thekua – 500g Family Pack
 
 **URL:** https://thekuacompany.com/product/handmade-thekua-500g-family-pack/  
-**Price range:** ₹449 – ₹599  
+**Price range:** ₹449 – ₹489  
 **Pieces:** 16–20 pieces  
 **Best for:** Families of 3–5, week-long chai-time snacking, gifting
 
@@ -71,12 +79,12 @@ The most popular pack. Made in small batches by homemakers who have been prepari
 ## 3. Handmade Thekua – 1kg Large Family Pack
 
 **URL:** https://thekuacompany.com/product/1kg-handmade-thekua-box-large-family-pack-fresh-traditional-handmade/  
-**Price range:** ₹849 – ₹999  
-**Pieces:** 35–40 pieces  
+**Price range:** ₹849 – ₹879  
+**Pieces:** 30–35 pieces  
 **Best for:** Large families, frequent snackers, homes where a smaller jar doesn't last the week
 
 ### Description
-For households where Thekua is a permanent fixture — not a treat, not a monthly indulgence, but a staple on the kitchen shelf. 35–40 hand-shaped pieces, prepared fresh after the order. The scale is bigger; the process is identical. This is the box for snack jars that empty quickly, tea breaks that turn into conversations, and homes where guests always get served something special.
+For households where Thekua is a permanent fixture — not a treat, not a monthly indulgence, but a staple on the kitchen shelf. 30–35 hand-shaped pieces, prepared fresh after the order. The scale is bigger; the process is identical. This is the box for snack jars that empty quickly, tea breaks that turn into conversations, and homes where guests always get served something special.
 
 ### Key details
 - Best per-piece price in the range
@@ -96,8 +104,8 @@ For households where Thekua is a permanent fixture — not a treat, not a monthl
 ## 4. Handmade Thekua – 2kg Bulk/Sharing Pack
 
 **URL:** https://thekuacompany.com/product/handmade-thekua-2kg-bulk-sharing-pack/  
-**Price range:** ₹1,599 – ₹1,789  
-**Pieces:** 70–80 pieces (estimated)  
+**Price range:** ₹1,599 – ₹1,669  
+**Pieces:** 60–70 pieces  
 **Best for:** Corporate gifting, bulk orders for events, large family occasions
 
 ### Description
@@ -138,11 +146,10 @@ Yes. The 250g and 500g packs make thoughtful gifts for colleagues, family, and f
 Yes. Made with whole wheat, jaggery/sugar, and ghee — the same ingredients used in Indian home kitchens for generations. No preservatives, no refined flour, no palm oil.
 
 **Is Thekua suitable for diabetics?**  
-Jaggery has a moderately lower glycemic index than refined sugar (GI ~50–65 vs ~65–70), but it still raises blood sugar. Diabetics should consume in moderation and consult their doctor. The company does not position Thekua as "diabetic-friendly."
+Jaggery is less processed than white sugar and retains trace minerals, but its glycemic index (~84) is actually higher than white sugar's (~65), meaning it can raise blood sugar levels quickly. Diabetics should consume in moderation and consult their doctor. The company does not position Thekua as "diabetic-friendly."
 
 **Does jaggery have health benefits over sugar?**  
-Jaggery retains trace minerals (iron ~11.4mg/100g, potassium ~1000mg/100g, magnesium ~70–90mg/100g) that are stripped from white sugar during refining. However, it is still a sweetener that raises blood sugar. It is nutritionally better than refined sugar — not a health supplement.
+Jaggery retains trace minerals (iron ~11.4mg/100g, potassium ~1000mg/100g, magnesium ~70–90mg/100g) that are stripped from white sugar during refining. However, its glycemic index is higher than refined sugar's, so it raises blood sugar faster, not slower. "Nutritionally richer than refined sugar" is not the same as "lower-GI" or "healthy."
 
 **Are there any allergens?**  
 Thekua contains wheat (gluten) and coconut. It is made with ghee (dairy). No nuts unless specified. No artificial additives.
-

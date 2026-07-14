@@ -19,7 +19,7 @@ Authors: Neetu Yadav and Geeta Singh (co-founders)
 - The Thekua Company's mission is to rebuild the commercial infrastructure so Thekua can be in the kitchen every week.
 - **PM Modi gifted Thekua to Richard Raší (Speaker of Slovakia's Parliament) in June 2026** — the first Indian PM to visit Slovakia since its independence.
 - Available in 250g, 500g, 1kg, 2kg packs at thekuacompany.com.
-- Shelf life: 60–90 days (Note: this post states 60–90 days; product pages say 30–45 days — the 30–45 day figure is the more conservative and standard guidance used on product pages).
+- Shelf life: 60–75 days in an airtight container at room temperature (confirmed figure; this post's original 60–90 day claim has been corrected).
 
 ---
 
@@ -29,13 +29,13 @@ Authors: Neetu Yadav and Geeta Singh (co-founders)
 
 ### Key points:
 - Honest nutritional analysis — no overclaiming. Thekua is a better snack than biscuits, not a superfood.
-- **Per piece (~35g):** ~160–170 kcal, ~22–24g carbs, ~7–8g fat, ~2–3g protein, ~1.5–2g fibre, ~1–1.5mg iron, ~60–80mg potassium.
+- **Per piece (20–24g):** ~80–110 kcal (jaggery variant ~81–97 kcal, sugar variant ~93–111 kcal), ~12–17g carbs, ~1.5–4.5g fat, ~1.5–2g protein, ~1.3–1.7g fibre.
 - **Whole wheat flour:** ~12g fibre per 100g (vs maida at ~2–3g). Also provides B vitamins (thiamine, riboflavin, niacin), iron (~3.5–4mg/100g), magnesium (~138mg/100g). The fibre is why one Thekua with chai is more satiating than four biscuits.
-- **Jaggery:** Iron ~11.4mg/100g (per IFCT 2017), potassium ~1000–1050mg/100g, magnesium ~70–90mg/100g. GI ~50–65 (vs refined sugar ~65–70). Still a sweetener — still raises blood sugar. Claims about "liver detoxification" or "blood purification" are not evidence-based.
+- **Jaggery:** Iron ~11.4mg/100g (per IFCT 2017), potassium ~1000–1050mg/100g, magnesium ~70–90mg/100g. GI ~84, higher than refined sugar's ~65 — jaggery raises blood sugar faster, not slower, despite being less processed. Still a sweetener. Claims about "liver detoxification" or "blood purification" are not evidence-based.
 - **Ghee:** Contains fat-soluble vitamins A, D, E, K; butyric acid (short-chain fatty acid important for gut health); small amounts of CLA. Rich in saturated fat (~62g per 100g). Better than refined palm oil but "better than palm oil" ≠ "heart-healthy."
 - **Dried coconut:** Medium-chain triglycerides (MCTs), ~9g fibre/100g. Primarily there for texture — the crunch. Present at 50–60g per kg of atta.
 - Recipe ratio: 500g jaggery per 1kg atta, 80–100g ghee in dough per kg atta, plus frying in ghee.
-- Comparison table: Thekua ~160–170 kcal/40g, with desi ghee + jaggery + no preservatives. vs Gulab Jamun ~150–175, Kaju Katli ~180–200, Parle-G (5 biscuits) ~175–185.
+- Comparison table: Thekua ~80–110 kcal per piece (20–24g), with desi ghee + jaggery + no preservatives. vs Gulab Jamun ~150–175 kcal, Kaju Katli ~180–200 kcal, Parle-G (5 biscuits) ~175–185 kcal — note the Thekua figure is per single piece while the others are per comparable serving; per-gram, Thekua is not dramatically lower in calories, the advantage is ingredient quality, not calorie count.
 - Thekua wins on ingredient quality, not calories.
 
 ---
